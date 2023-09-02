@@ -26,7 +26,7 @@ public class DisplayTheArray {
     //Expectation -> idx se end tak sab print kar dega..
     //Faith -> idx+1 se end tak sab print karna janta hai..
 
-    private static void display(int[] arr, int idx) {
+    public static void display(int[] arr, int idx) {
         if (idx == arr.length) {
             return;
         }
