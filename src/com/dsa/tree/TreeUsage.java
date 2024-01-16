@@ -30,17 +30,17 @@ public class TreeUsage {
 
     public static void main(String[] args) {
         Integer[] arr = {
-                50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, null, 87, null, null
+            50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, null, 87, null, null
         };
         Node rootNode = new Node(arr[0], null, null);
         Pair rootPair = new Pair(rootNode, 1);
-
+    
         Stack<Pair> stack = new Stack<>();
         stack.push(rootPair);
         int index = 0;
         while (stack.size() > 0) {
             Pair topPair = stack.peek();
-
+    
             // Left k lie kaam karna hai
             if (topPair.state == 1) {
                 index++;
@@ -64,12 +64,11 @@ public class TreeUsage {
                     topPair.node.right = null;
                 }
                 topPair.state++;
-
             } else {
                 stack.pop();
             }
         }
-
+        display(rootNode);
         // Move this line outside the while loop
         /*
          * display(rootNode);
@@ -198,25 +197,24 @@ public class TreeUsage {
         String preOrder = "";
         String inOrder = "";
         String postorder = "";
-
+    
         while (stack.size() > 0) {
             Pair topPair = stack.peek();
-            if (topPair.state == 1) {// Pr eorder me state ++ , left child dundhega
+            if (topPair.state == 1) { // Preorder: state ++, left child dundhega
                 preOrder += topPair.node.data + " ";
                 topPair.state++;
                 if (topPair.node.left != null) {
                     Pair leftPair = new Pair(topPair.node.left, 1);
                     stack.push(leftPair);
                 }
-            }
-            if (topPair.state == 2) {// in order state ++ right child dhundhega
+            } else if (topPair.state == 2) { // Inorder: state ++, right child dhundhega
                 inOrder += topPair.node.data + " ";
                 topPair.state++;
                 if (topPair.node.right != null) {
                     Pair rightPair = new Pair(topPair.node.right, 1);
                     stack.push(rightPair);
                 }
-            } else { // posst order yahan stack pop hoga
+            } else { // Postorder: state == 3, stack pop hoga
                 postorder += topPair.node.data + " ";
                 stack.pop();
             }
@@ -225,7 +223,7 @@ public class TreeUsage {
         System.out.println("  *********************   ");
         System.out.println(inOrder);
         System.out.println("  *********************   ");
-
         System.out.println(postorder);
     }
+    
 }
