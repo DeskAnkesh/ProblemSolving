@@ -30,7 +30,7 @@ public class TreeUsage {
 
     public static void main(String[] args) {
         Integer[] arr = {
-            50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, null, 87, null, null
+            50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null,null ,null, 87, null, null
         };
         Node rootNode = new Node(arr[0], null, null);
         Pair rootPair = new Pair(rootNode, 1);
@@ -84,7 +84,8 @@ public class TreeUsage {
          */
         // System.out.println("Level order");
         // levelOrderTraversal(rootNode);
-        traverIterative(rootNode);
+        // traverIterative(rootNode);
+        printKlevelsDown(rootNode, 3);
     }
 
     public static void display(Node node) {
@@ -225,5 +226,33 @@ public class TreeUsage {
         System.out.println("  *********************   ");
         System.out.println(postorder);
     }
-    
+    public static boolean find(Node node, int data){
+        if (node == null) {
+            return false;
+        }
+        if (node.data ==data) {
+            return true;
+
+        } 
+        boolean findInLeftChild=find(node.left, data);
+        if (findInLeftChild) {
+            return true;
+        }
+        boolean findInRightChild=find(node.right, data);
+        if (findInRightChild) {
+            return true;
+        }
+        return false;
+    }
+
+    public  static void printKlevelsDown(Node node,int k){
+        if (node ==null || k<0) {
+            return;
+        }
+        if (k==0) {
+            System.out.println(node.data);
+        }
+        printKlevelsDown(node.left, k-1);
+        printKlevelsDown(node.right, k-1);
+    }
 }
