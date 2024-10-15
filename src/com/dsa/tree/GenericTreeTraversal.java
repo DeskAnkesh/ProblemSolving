@@ -57,7 +57,59 @@ public class GenericTreeTraversal {
         node4.children.add(node7);    // 4 -> 7
 
         // Performing level-order traversal linewise
-        levelOrderLinewise(root);
+      //  levelOrderLinewise(root);
+        levelOrderLinewise2(root);
     }
+
+  /*  private static void levelOrderLinewise2(Node node) {
+        if (node == null) return;
+        Queue<Node> mq=new ArrayDeque<>();
+        mq.add(node);
+        mq.add(null);
+        while (!mq.isEmpty()){
+            node =mq.remove();
+            if (Objects.nonNull(node)){
+                System.out.println(node.data +" ");
+                for (Node ch :node.children){
+                    mq.add(ch);
+                }
+            }else {
+                if (!mq.isEmpty()){
+                    mq.add(null);
+                    System.out.println();
+                }
+            }
+        }
+    } */
+  private static void levelOrderLinewise2(Node node) {
+      if (node == null) return;  // Handle the edge case where root is null
+
+      Queue<Node> mq = new ArrayDeque<>();
+      mq.add(node);         // Add root node
+      mq.add(new Node(-1))   ;     // Add marker to signify the end of the current level
+
+      while (!mq.isEmpty()) {
+          node = mq.remove();
+
+          if (node.data != -1) {
+              System.out.print(node.data + " ");   // Print current node's data
+
+              // Add children of the current node to the queue
+              for (Node ch : node.children) {
+                  mq.add(ch);
+              }
+          } else {
+              // End of the current level, print a newline
+              System.out.println();
+
+              // If more nodes are left in the queue, add a new null marker for the next level
+              if (!mq.isEmpty()) {
+                  mq.add(new Node(-1));
+              }
+          }
+      }
+  }
+
+
 }
 
