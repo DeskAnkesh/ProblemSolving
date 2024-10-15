@@ -12,4 +12,5 @@ class Node {
         this.data = data;
         this.children = new ArrayList<>();
     }
+    Node(){}
 }
